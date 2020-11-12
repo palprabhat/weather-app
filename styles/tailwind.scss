@@ -1,0 +1,94 @@
+:root {
+  --dark-theme-bg-color: #1a202c;
+  --dark-theme-text-color: #ffffff;
+
+  --light-theme-bg-color: #ffffff;
+  --light-theme-text-color: #2f2e41;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  @apply text-black;
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply overflow-x-hidden;
+  background-color: var(--light-theme-bg-color);
+  color: var(--light-theme-text-color);
+
+  &[dark="true"] {
+    background-color: var(--dark-theme-bg-color);
+    color: var(--dark-theme-text-color);
+  }
+}
+
+// ::selection {
+//   @apply bg-primary-500 text-white;
+// }
+
+// :target::before {
+//   content: "";
+//   display: block;
+//   top: -5rem;
+//   margin: 5rem 0 0;
+// }
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Merriweather Sans", sans-serif;
+}
+
+h1 {
+  @apply text-2xl;
+  line-height: normal;
+
+  @screen lg {
+    @apply text-3xl;
+  }
+}
+
+h3 {
+  @apply text-xl;
+}
+
+p {
+  @apply mt-3 text-xl;
+}
+
+// @layer components {
+//   .btn-primary {
+//     @apply py-2 px-8 bg-primary-500 text-white rounded-full transition duration-300 ease-in-out;
+//   }
+
+//   .btn-primary:disabled {
+//     @apply opacity-50 cursor-not-allowed;
+//   }
+
+//   .btn-primary:not(:disabled):hover,
+//   .btn-primary:not(:disabled):focus {
+//     @apply bg-primary-600;
+//   }
+//   .btn-primary:not(:disabled):active {
+//     @apply bg-primary-700;
+//   }
+
+//   .btn-secondary {
+//     @apply border-solid border-2 py-2 px-8 border-primary-500 text-primary-500 rounded-full transition duration-300 ease-in-out;
+//   }
+
+//   .btn-secondary:not(:disabled):hover,
+//   .btn-secondary:not(:disabled):focus {
+//     @apply border-primary-600 bg-primary-600 text-white;
+//   }
+//   .btn-secondary:not(:disabled):active {
+//     @apply border-primary-700 bg-primary-700 text-white;
+//   }
+// }
