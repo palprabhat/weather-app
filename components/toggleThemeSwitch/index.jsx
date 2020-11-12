@@ -20,7 +20,7 @@ const ToggleSwitch = ({
         {...props}
       />
       <label htmlFor={id} style={{ fontSize: size }}>
-        <span></span>
+        <span />
       </label>
     </div>
   );
