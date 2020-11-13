@@ -11,7 +11,7 @@ module.exports = {
   ],
   theme: {
     fontFamily: {
-      sans: ["Quattrocento Sans", "sans-serif"],
+      sans: ["Barlow", "sans-serif"],
     },
     extend: {
       spacing: {

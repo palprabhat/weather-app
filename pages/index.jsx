@@ -31,7 +31,7 @@ const Home = () => {
   return (
     <Layout>
       <LocationSearch
-        onSelect={({ lat, lon, place }) => {
+        onLocationSelect={({ lat, lon, place }) => {
           const loc = { lat, lon };
           setLocation(loc);
           setPalceName(place);

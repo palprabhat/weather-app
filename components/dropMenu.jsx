@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { useDarkTheme } from "../context/themeContext";
-import findByType from "../utils/findByType";
+import { findByType } from "../utils";
 
 const Title = () => null;
 const Items = () => null;

@@ -1,6 +1,6 @@
 import { Children } from "react";
 
-const findByType = (children, component) => {
+export const findByType = (children, component) => {
   const elements = [];
 
   const type = [component.displayName || component.name];
@@ -15,5 +15,3 @@ const findByType = (children, component) => {
 
   return elements[0];
 };
-
-export default findByType;
