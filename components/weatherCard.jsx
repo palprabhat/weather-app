@@ -1,14 +1,18 @@
 import { useDarkTheme } from "../context/themeContext";
 import * as dayjs from "dayjs";
 import { useMertic } from "../context/unitContext";
-import { getDayTime, getweatherIcon } from "../utils";
+import { getDayTime, getFahrenheit, getweatherIcon } from "../utils";
 import { IconContext } from "react-icons/lib";
 import { WiSunrise, WiSunset, WiTime3 } from "react-icons/wi";
-import { GiSandsOfTime } from "react-icons/gi";
 
 const WeatherCard = ({ weather, placeName }) => {
   const darkTheme = useDarkTheme();
   const metric = useMertic();
+
+  const formattedTemp = metric
+    ? weather.current.temp
+    : getFahrenheit(weather.current.temp);
+  const temp = parseFloat(formattedTemp.toString()).toFixed(0);
 
   return (
     <div
@@ -32,9 +36,7 @@ const WeatherCard = ({ weather, placeName }) => {
         </div>
 
         <div>
-          <div className="text-5xl">
-            {`${weather.current.temp}°${metric ? "C" : "F"}`}
-          </div>
+          <div className="text-5xl">{`${temp}°${metric ? "C" : "F"}`}</div>
           <div>{`Feels like ${weather.current.feels_like}`}</div>
           <div className="text-xl">{placeName}</div>
         </div>

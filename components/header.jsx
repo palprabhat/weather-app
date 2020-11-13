@@ -1,4 +1,5 @@
-import ToggleThemeSwitch from "./toggleThemeSwitch/index";
+import ToggleThemeSwitch from "./toggleThemeSwitch";
+import ToggleSwitch from "./toggleSwitch";
 import { useDarkTheme, useThemeToggle } from "../context/themeContext";
 import { useMertic, useUnitToggle } from "../context/unitContext";
 import DropMenu from "./dropMenu";
@@ -46,7 +47,7 @@ const Header = () => {
             />
           </MenuItems>
           <MenuItems title={`Unit: ${metric ? "Metric" : "Imperial"}`}>
-            <ToggleThemeSwitch
+            <ToggleSwitch
               id="unit-toggle"
               size="0.5rem"
               checked={metric}

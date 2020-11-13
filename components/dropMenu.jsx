@@ -28,7 +28,7 @@ const RenderItems = ({ children, closeOnItemSelect, darkTheme }) => {
             className={`${
               darkTheme
                 ? "bg-gray-800 hover:bg-gray-700 focus:bg-gray-700"
-                : "bg-white"
+                : "bg-white hover:bg-indigo-100 focus:bg-indigo-100"
             }`}
             onClick={(e) => (!closeOnItemSelect ? e.stopPropagation() : null)}
           >

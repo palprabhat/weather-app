@@ -1,0 +1,52 @@
+.toggleContainer {
+  --switch-w: 4em;
+  --switch-h: 2em;
+  --switch-handle-scale: 0.65;
+  --switch-off-handle-x: -0.125em;
+  --switch-on-handle-x: calc(100% - 0.125em);
+  --switch-transition-duration: 0.2s;
+
+  .themeToggle {
+    display: none;
+
+    & + label {
+      display: flex;
+      height: var(--switch-h);
+      width: var(--switch-w);
+      border-radius: calc(var(--switch-h) / 2);
+      background-size: auto 8em;
+      background-position: bottom;
+      background-color: #4184b1;
+      transition: var(--switch-transition-duration);
+      border: 0.125em solid hsl(207, 30%, 95%);
+      overflow: hidden;
+
+      span {
+        background: #fffff7;
+        border-radius: 50%;
+        height: var(--switch-h);
+        width: var(--switch-h);
+        transform: translateX(var(--switch-off-handle-x))
+          scale(var(--switch-handle-scale));
+        transition: var(--switch-transition-duration);
+        cursor: pointer;
+        margin-top: var(--switch-off-handle-x);
+      }
+    }
+
+    &:checked {
+      font-size: var(--switch-font-size);
+
+      & + label {
+        background-position: top;
+
+        span {
+          background: #fffff7;
+          border-radius: 50%;
+          transform: translateX(var(--switch-on-handle-x))
+            scale(var(--switch-handle-scale));
+        }
+      }
+    }
+  }
+}
