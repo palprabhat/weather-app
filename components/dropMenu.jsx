@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { useDarkTheme } from "../context/themeContext";
 import { findByType } from "../utils";
 
@@ -62,23 +62,26 @@ const DropMenu = ({ children, closeOnItemSelect = true }) => {
         <RenderTitle>{children}</RenderTitle>
       </button>
 
-      {open && (
-        <motion.div
-          initial={{ height: 0, opacity: 0 }}
-          animate={{ height: "auto", opacity: 1 }}
-          transition={{ duration: 0.15 }}
-          className={`absolute overflow-hidden right-0 z-10 border rounded-md shadow-sm focus:outline-none ${
-            darkTheme ? "bg-gray-800 border-gray-600" : "bg-white"
-          }`}
-        >
-          <RenderItems
-            closeOnItemSelect={closeOnItemSelect}
-            darkTheme={darkTheme}
+      <AnimatePresence>
+        {open && (
+          <motion.div
+            initial={{ height: 0, opacity: 0 }}
+            animate={{ height: "auto", opacity: 1 }}
+            exit={{ height: 0, opacity: 0 }}
+            transition={{ duration: 0.15 }}
+            className={`absolute overflow-hidden right-0 z-10 border rounded-md shadow-sm focus:outline-none ${
+              darkTheme ? "bg-gray-800 border-gray-600" : "bg-white"
+            }`}
           >
-            {children}
-          </RenderItems>
-        </motion.div>
-      )}
+            <RenderItems
+              closeOnItemSelect={closeOnItemSelect}
+              darkTheme={darkTheme}
+            >
+              {children}
+            </RenderItems>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 };

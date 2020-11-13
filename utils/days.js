@@ -10,3 +10,7 @@ export const getDayTime = (sunrise, sunset) => {
 
   return `${h}h ${min}m`;
 };
+
+export const getTime = (unixTime, format) => {
+  return dayjs.unix(unixTime).format(format);
+};

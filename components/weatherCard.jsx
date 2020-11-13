@@ -1,14 +1,33 @@
 import { useDarkTheme } from "../context/themeContext";
-import * as dayjs from "dayjs";
 import { useMertic } from "../context/unitContext";
-import { getDayTime, getFahrenheit, getweatherIcon } from "../utils";
+import { getDayTime, getTemp, getTime, getweatherIcon } from "../utils";
 import { IconContext } from "react-icons/lib";
-import { WiSunrise, WiSunset, WiTime3 } from "react-icons/wi";
+import {
+  WiBarometer,
+  WiHumidity,
+  WiSunrise,
+  WiSunset,
+  WiTime3,
+} from "react-icons/wi";
 import { useMemo } from "react";
+import HourForecast from "./hourlyForecart";
+import DailyForecast from "./dailyForecast";
 
-const getTemp = (temp, metric) => {
-  const formattedTemp = metric ? temp : getFahrenheit(temp);
-  return parseFloat(formattedTemp.toString()).toFixed(0);
+const WeatherItem = ({ icon, value, desc }) => {
+  const darkTheme = useDarkTheme();
+  return (
+    <div className="flex flex-col items-center">
+      <IconContext.Provider
+        value={{
+          className: `text-2xl ${darkTheme ? "text-white" : "text-black"}`,
+        }}
+      >
+        {icon}
+      </IconContext.Provider>
+      <div>{value}</div>
+      <div className="text-xs">{desc}</div>
+    </div>
+  );
 };
 
 const WeatherCard = ({ weather, placeName }) => {
@@ -45,7 +64,6 @@ const WeatherCard = ({ weather, placeName }) => {
           </IconContext.Provider>
           <div>{weather.current.weather[0].main}</div>
         </div>
-
         <div>
           <div className="text-5xl">{`${temp}${tempUnit}`}</div>
           <div>{`Feels like ${feelsLike}${tempUnit}`}</div>
@@ -53,30 +71,48 @@ const WeatherCard = ({ weather, placeName }) => {
         </div>
       </div>
 
-      <div className="flex justify-between mt-8">
-        <IconContext.Provider
-          value={{
-            className: `text-2xl ${darkTheme ? "text-white" : "text-black"}`,
-          }}
-        >
-          <div className="flex flex-col items-center">
-            <WiSunrise />
-            <div>{dayjs.unix(weather.current.sunrise).format("hh:mm a")}</div>
-            <div className="text-xs">Sunrise</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <WiSunset />
-            <div>{dayjs.unix(weather.current.sunset).format("hh:mm a")}</div>
-            <div className="text-xs">Sunset</div>
-          </div>
-          <div className="flex flex-col items-center">
-            <WiTime3 />
-            <div>
-              {getDayTime(weather.current.sunrise, weather.current.sunset)}
-            </div>
-            <div className="text-xs">Daytime</div>
-          </div>
-        </IconContext.Provider>
+      <div className="mt-8">
+        <HourForecast hourly={weather.hourly} />
+      </div>
+
+      <div className="flex justify-around mt-8">
+        <WeatherItem
+          icon={<WiSunrise />}
+          value={getTime(weather.current.sunrise, "hh:mm a")}
+          desc="Sunrise"
+          darkTheme
+        />
+        <WeatherItem
+          icon={<WiSunset />}
+          value={getTime(weather.current.sunset, "hh:mm a")}
+          desc="Sunset"
+          darkTheme
+        />
+        <WeatherItem
+          icon={<WiTime3 />}
+          value={getDayTime(weather.current.sunrise, weather.current.sunset)}
+          desc="Daytime"
+          darkTheme
+        />
+      </div>
+
+      <div className="flex justify-around mt-8">
+        <WeatherItem
+          icon={<WiHumidity />}
+          value={`${weather.current.humidity}%`}
+          desc="Humidity"
+          darkTheme
+        />
+        <WeatherItem
+          icon={<WiBarometer />}
+          value={`${weather.current.pressure} mbar`}
+          desc="Pressure"
+          darkTheme
+        />
+      </div>
+
+      <div className="mt-8">
+        <DailyForecast daily={weather.daily} />
       </div>
     </div>
   );

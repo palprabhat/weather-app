@@ -7,7 +7,7 @@ const Layout = ({ children }) => {
     <ThemeProvider>
       <UnitProvider>
         <Header />
-        <div className="container mx-auto max-w-screen-md mt-3 px-3">
+        <div className="container mx-auto max-w-screen-md mt-3 px-3 pb-6">
           {children}
         </div>
       </UnitProvider>
