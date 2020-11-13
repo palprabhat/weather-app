@@ -4,15 +4,26 @@ import { useMertic } from "../context/unitContext";
 import { getDayTime, getFahrenheit, getweatherIcon } from "../utils";
 import { IconContext } from "react-icons/lib";
 import { WiSunrise, WiSunset, WiTime3 } from "react-icons/wi";
+import { useMemo } from "react";
+
+const getTemp = (temp, metric) => {
+  const formattedTemp = metric ? temp : getFahrenheit(temp);
+  return parseFloat(formattedTemp.toString()).toFixed(0);
+};
 
 const WeatherCard = ({ weather, placeName }) => {
   const darkTheme = useDarkTheme();
   const metric = useMertic();
 
-  const formattedTemp = metric
-    ? weather.current.temp
-    : getFahrenheit(weather.current.temp);
-  const temp = parseFloat(formattedTemp.toString()).toFixed(0);
+  const temp = useMemo(() => getTemp(weather.current.temp, metric), [
+    metric,
+    weather,
+  ]);
+  const feelsLike = useMemo(() => getTemp(weather.current.feels_like, metric), [
+    metric,
+    weather,
+  ]);
+  const tempUnit = `°${metric ? "C" : "F"}`;
 
   return (
     <div
@@ -36,8 +47,8 @@ const WeatherCard = ({ weather, placeName }) => {
         </div>
 
         <div>
-          <div className="text-5xl">{`${temp}°${metric ? "C" : "F"}`}</div>
-          <div>{`Feels like ${weather.current.feels_like}`}</div>
+          <div className="text-5xl">{`${temp}${tempUnit}`}</div>
+          <div>{`Feels like ${feelsLike}${tempUnit}`}</div>
           <div className="text-xl">{placeName}</div>
         </div>
       </div>
