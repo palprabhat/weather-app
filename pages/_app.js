@@ -29,11 +29,12 @@ function MyApp({ Component, pageProps }) {
           href="https://fonts.googleapis.com/css2?family=Barlow:wght@100;200;300;400;500;600;700&display=swap"
           rel="stylesheet"
         />
-        <link
-          rel="stylesheet"
-          href="https://unpkg.com/swiper/css/swiper.min.css"
-        ></link>
         <title>Weather App</title>
+
+        <meta
+          name="keywords"
+          content="weather,weatherapp,weather-app,weather app,nextjs,tailwindcss,project,mini project,react"
+        />
       </Head>
       <Component {...pageProps} />
     </>
