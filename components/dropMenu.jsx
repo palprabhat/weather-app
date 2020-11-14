@@ -40,7 +40,7 @@ const RenderItems = ({ children, closeOnItemSelect, darkTheme }) => {
   );
 };
 
-const DropMenu = ({ children, closeOnItemSelect = true }) => {
+const DropMenu = ({ children, closeOnItemSelect = true, className }) => {
   const [open, setOpen] = useState(false);
   const darkTheme = useDarkTheme();
 
@@ -54,7 +54,7 @@ const DropMenu = ({ children, closeOnItemSelect = true }) => {
   }, [open]);
 
   return (
-    <div className="relative">
+    <div className={`relative ${className}`}>
       <button
         className="select-none outline-none focus:outline-none"
         onClick={() => setOpen(!open)}
