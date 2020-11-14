@@ -5,11 +5,11 @@ const weatherKey = process.env.OPEN_WEATHER_API_KEY;
 
 export default async (req, res) => {
   if (req.method === "GET") {
-    const { units, lat, lon } = req.query;
+    const { lat, lon } = req.query;
 
     try {
       const response = await axios.get(
-        `${weatherUrl}/onecall?appid=${weatherKey}&units=${units}&exclude=minutely&lat=${lat}&lon=${lon}`
+        `${weatherUrl}/onecall?appid=${weatherKey}&units=metric&exclude=minutely&lat=${lat}&lon=${lon}`
       );
 
       if (response.status !== 200) {

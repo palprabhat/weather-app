@@ -7,9 +7,7 @@ import { AiOutlineSetting } from "react-icons/ai";
 
 const MenuItems = ({ title, children }) => {
   return (
-    <div
-      className={"flex justify-between items-center px-4 py-3 w-48 select-none"}
-    >
+    <div className={"flex justify-between items-center px-4 py-3 select-none"}>
       <div className="mr-4">{title}</div>
       {children}
     </div>
@@ -37,8 +35,8 @@ const Header = () => {
             <AiOutlineSetting fontSize="1.25rem" />
           </div>
         </DropMenu.Title>
-        <DropMenu.Items>
-          <MenuItems title="Appearance">
+        <DropMenu.Items className="w-56">
+          <MenuItems title={`Appearance: ${darkTheme ? "Dark" : "Light"}`}>
             <ToggleThemeSwitch
               id="theme-toggle"
               size="0.5rem"
@@ -46,7 +44,7 @@ const Header = () => {
               onChange={toggleTheme}
             />
           </MenuItems>
-          <MenuItems title={`Unit: ${metric ? "Metric" : "Imperial"}`}>
+          <MenuItems title={`Units: ${metric ? "Metric" : "Imperial"}`}>
             <ToggleSwitch
               id="unit-toggle"
               size="0.5rem"

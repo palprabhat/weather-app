@@ -1,4 +1,5 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, useContext, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const UnitContext = createContext();
 const UnitUpdateContext = createContext();
@@ -13,9 +14,19 @@ export const useUnitToggle = () => {
 
 export const UnitProvider = ({ children }) => {
   const [metric, setMetric] = useState(true);
+  const [metricLoc, setMetricLoc] = useLocalStorage("metric", metric);
+
   const toggleUnit = () => {
     setMetric((prevUnit) => !prevUnit);
   };
+
+  useEffect(() => {
+    setMetric(metricLoc);
+  }, []);
+
+  useEffect(() => {
+    setMetricLoc(metric);
+  }, [metric]);
 
   return (
     <UnitContext.Provider value={metric}>

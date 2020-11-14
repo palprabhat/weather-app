@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-key */
 import {
   WiCloud,
   WiCloudy,
@@ -70,13 +71,10 @@ const iconMap = [
   },
 ];
 
-export const getweatherIcon = (id, icon, onlyDay = false) => {
+export const getweatherIcon = (id, icon) => {
   for (let i = 0; i < iconMap.length; i++)
     if (iconMap[i].ids.includes(id)) {
       const char = icon.slice(-1);
-
-      // if (onlyDay) return iconMap[i].reactIcon[0];
-
       return iconMap[i].reactIcon[char === "d" ? 0 : 1];
     }
 };

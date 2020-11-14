@@ -1,4 +1,5 @@
 import { createContext, useContext, useEffect, useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
 
 const ThemeContext = createContext();
 const ThemeUpdateContext = createContext();
@@ -12,37 +13,37 @@ export const useThemeToggle = () => {
 };
 
 export const ThemeProvider = ({ children }) => {
-  const [darkTheme, setDarkTheme] = useState(false);
+  const [darkTheme, setDarkTheme] = useState(null);
+  const [darkThemeLoc, setDarkThemeLoc] = useLocalStorage("darkTheme", null);
+
   const toggleTheme = () => {
     setDarkTheme((prevTheme) => !prevTheme);
   };
 
   useEffect(() => {
     const body = document.body;
-
     darkTheme
       ? body.setAttribute("dark", "true")
       : body.removeAttribute("dark");
+
+    if (darkTheme !== null) setDarkThemeLoc(darkTheme);
   }, [darkTheme]);
 
   useEffect(() => {
-    const darkMwdiaMatch =
+    const darkMediaMatch =
       window.matchMedia && window.matchMedia("(prefers-color-scheme: dark)");
 
-    if (darkMwdiaMatch.matches) {
-      setDarkTheme(true);
+    if (darkThemeLoc === null) {
+      darkMediaMatch.matches ? setDarkTheme(true) : setDarkTheme(false);
     } else {
-      setDarkTheme(false);
+      setDarkTheme(darkThemeLoc);
     }
 
     const handler = ({ matches }) => {
-      if (matches) {
-        setDarkTheme(true);
-      } else {
-        setDarkTheme(false);
-      }
+      matches ? setDarkTheme(true) : setDarkTheme(false);
     };
-    darkMwdiaMatch.addEventListener("change", handler);
+
+    darkMediaMatch.addEventListener("change", handler);
     return () => {
       window.removeEventListener("change", handler);
     };

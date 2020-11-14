@@ -10,8 +10,22 @@ import {
   WiTime3,
 } from "react-icons/wi";
 import { useMemo } from "react";
-import HourForecast from "./hourlyForecart";
+import HourForecast from "./hourlyForecast";
 import DailyForecast from "./dailyForecast";
+
+const Loading = () => {
+  const darkTheme = useDarkTheme();
+
+  return (
+    <div
+      className={`mt-4 p-4 rounded-lg shadow-md ${
+        darkTheme ? "bg-gray-800" : "border border-gray-200"
+      }`}
+    >
+      Loading
+    </div>
+  );
+};
 
 const WeatherItem = ({ icon, value, desc }) => {
   const darkTheme = useDarkTheme();
@@ -30,7 +44,7 @@ const WeatherItem = ({ icon, value, desc }) => {
   );
 };
 
-const WeatherCard = ({ weather, placeName }) => {
+const WeatherCard = ({ weather, placeName, isLoading }) => {
   const darkTheme = useDarkTheme();
   const metric = useMertic();
 
@@ -46,10 +60,15 @@ const WeatherCard = ({ weather, placeName }) => {
 
   return (
     <div
-      className={`mt-4 p-4 rounded-lg shadow-md ${
-        darkTheme ? "bg-gray-800" : "border border-gray-100"
+      className={`relative mt-4 p-4 rounded-lg shadow-md ${
+        darkTheme ? "bg-gray-800" : "border border-gray-200"
       }`}
     >
+      {isLoading && (
+        <div className="absolute right-0 mr-4">
+          <div className="loader animate-spin-fast duration-100" />
+        </div>
+      )}
       <div className="flex justify-around">
         <div className="flex flex-col justify-center items-center">
           <IconContext.Provider
@@ -64,7 +83,7 @@ const WeatherCard = ({ weather, placeName }) => {
           </IconContext.Provider>
           <div>{weather.current.weather[0].main}</div>
         </div>
-        <div>
+        <div style={{ maxWidth: "40%" }}>
           <div className="text-5xl">{`${temp}${tempUnit}`}</div>
           <div>{`Feels like ${feelsLike}${tempUnit}`}</div>
           <div className="text-xl">{placeName}</div>
@@ -117,5 +136,7 @@ const WeatherCard = ({ weather, placeName }) => {
     </div>
   );
 };
+
+WeatherCard.Loading = Loading;
 
 export default WeatherCard;

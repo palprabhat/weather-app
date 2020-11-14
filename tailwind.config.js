@@ -14,18 +14,13 @@ module.exports = {
       sans: ["Barlow", "sans-serif"],
     },
     extend: {
-      spacing: {
-        9: "2.25rem",
-        11: "2.75rem",
-      },
       colors: {
         black: "#2f2e41",
       },
+      animation: {
+        "spin-fast": "spin 0.5s linear infinite",
+      },
     },
-  },
-  variants: {
-    opacity: ["responsive", "hover", "focus", "group-hover", "group-focus"],
-    textColor: ["responsive", "hover", "focus", "group-hover", "group-focus"],
   },
   plugins: [],
 };
