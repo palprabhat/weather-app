@@ -15,7 +15,6 @@ export default async (req, res) => {
       if (response.status !== 200 || response.data.status !== "OK") {
         res.status(500).send({
           error: "Unable to get autocomplete",
-          response: response,
           message: response.data.error_message,
         });
         return;
