@@ -24,7 +24,7 @@ export default async (req, res) => {
       res.status(200).send(response.data);
     } catch (err) {
       console.error(err);
-      res.status(500).send({ error: "Unable to get autocomplete" });
+      res.status(500).send({ error: "Unable to get autocomplete", err: err });
     }
   } else {
     res.status(405).send({ error: "Request method not supported" });
