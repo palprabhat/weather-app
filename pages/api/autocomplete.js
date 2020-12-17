@@ -14,7 +14,7 @@ export default async (req, res) => {
 
       if (response.status !== 200 || response.data.status !== "OK") {
         res.status(500).send({
-          error: "Unable to get autpcomplete",
+          error: "Unable to get autocomplete",
           message: response.data.error_message,
         });
         return;
@@ -23,7 +23,7 @@ export default async (req, res) => {
       res.status(200).send(response.data);
     } catch (err) {
       console.error(err);
-      res.status(500).send({ error: "Unable to get autpcomplete" });
+      res.status(500).send({ error: "Unable to get autocomplete", err: err });
     }
   } else {
     res.status(405).send({ error: "Request method not supported" });
