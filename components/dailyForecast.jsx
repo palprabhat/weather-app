@@ -6,7 +6,7 @@ import { IconContext } from "react-icons/lib";
 import { WiDirectionUp } from "react-icons/wi";
 import { getweatherIcon } from "../utils/mapWeatherIcons";
 
-const DailyWeather = ({ daily }) => {
+const DailyWeather = ({ daily, timezone }) => {
   const darkTheme = useDarkTheme();
   const metric = useMertic();
 
@@ -22,7 +22,7 @@ const DailyWeather = ({ daily }) => {
 
   return (
     <div className="flex justify-between items-center p-3 w-full">
-      <div>{getTime(daily.dt, "dddd")}</div>
+      <div>{getTime(daily.dt, timezone, "dddd")}</div>
       <div className="flex justify-between w-1/2">
         <IconContext.Provider
           value={{

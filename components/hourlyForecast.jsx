@@ -6,7 +6,7 @@ import { IconContext } from "react-icons/lib";
 import { getweatherIcon } from "../utils/mapWeatherIcons";
 import { getTime } from "../utils/days";
 
-const HourItem = ({ hour }) => {
+const HourItem = ({ hour, timezone }) => {
   const darkTheme = useDarkTheme();
   const metric = useMertic();
 
@@ -19,7 +19,7 @@ const HourItem = ({ hour }) => {
 
   return (
     <div className="flex flex-col justify-center items-center p-3 w-full">
-      <div>{getTime(hour.dt, "h a")}</div>
+      <div>{getTime(hour.dt, timezone, "h a")}</div>
       <div className="flex justify-around items-center w-full">
         <IconContext.Provider
           value={{
@@ -36,11 +36,11 @@ const HourItem = ({ hour }) => {
   );
 };
 
-const HourlyForecast = ({ hourly }) => {
+const HourlyForecast = ({ hourly, timezone }) => {
   return (
     <div className="flex overflow-x-scroll border-t border-b">
       {hourly.slice(1, 25).map((hour, i) => (
-        <HourItem key={i} hour={hour} />
+        <HourItem key={i} hour={hour} timezone={timezone} />
       ))}
     </div>
   );

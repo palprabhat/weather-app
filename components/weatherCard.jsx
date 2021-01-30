@@ -69,6 +69,18 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
           <div className="loader animate-spin-fast duration-100" />
         </div>
       )}
+
+      <div>
+        <span className="font-bold">Local Date/Time: </span>
+        <span>
+          {getTime(
+            weather.current.dt,
+            weather.timezone,
+            "MMM D, YYYY / hh:mm a"
+          )}
+        </span>
+      </div>
+
       <div className="flex justify-around">
         <div className="flex flex-col justify-center items-center">
           <IconContext.Provider
@@ -91,19 +103,19 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
       </div>
 
       <div className="mt-8">
-        <HourForecast hourly={weather.hourly} />
+        <HourForecast hourly={weather.hourly} timezone={weather.timezone} />
       </div>
 
       <div className="flex justify-around mt-8">
         <WeatherItem
           icon={<WiSunrise />}
-          value={getTime(weather.current.sunrise, "hh:mm a")}
+          value={getTime(weather.current.sunrise, weather.timezone, "hh:mm a")}
           desc="Sunrise"
           darkTheme
         />
         <WeatherItem
           icon={<WiSunset />}
-          value={getTime(weather.current.sunset, "hh:mm a")}
+          value={getTime(weather.current.sunset, weather.timezone, "hh:mm a")}
           desc="Sunset"
           darkTheme
         />
@@ -131,7 +143,7 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
       </div>
 
       <div className="mt-8">
-        <DailyForecast daily={weather.daily} />
+        <DailyForecast daily={weather.daily} timezone={weather.timezone} />
       </div>
     </div>
   );
