@@ -18,7 +18,7 @@ const Alert = ({ alert, timezone }) => {
           <RiAlertFill className="text-red-600" />
           <div className="pl-2 text-black">{alert.event}</div>
         </div>
-        <RiArrowRightLine />
+        <RiArrowRightLine className="text-black" />
       </div>
       <Modal id="modal" isOpen={showModal} onClose={() => setShowModal(false)}>
         <button
