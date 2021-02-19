@@ -8,7 +8,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const Home = () => {
   const [isLoading, setIsLoading] = useState(false);
   const [location, setLocation] = useState({});
-  const [placeName, setPalceName] = useState("");
+  const [placeName, setPlaceName] = useState("");
   const [weather, setWeather] = useState({});
   const [locationLoc, setLocationLoc] = useLocalStorage("location", {});
 
@@ -19,7 +19,7 @@ const Home = () => {
         locationLoc.constructor === Object
       )
     ) {
-      setPalceName(locationLoc.place);
+      setPlaceName(locationLoc.place);
       setLocation({ lat: locationLoc.lat, lon: locationLoc.lon });
     }
   }, []);
@@ -66,7 +66,7 @@ const Home = () => {
           const loc = { lat, lon };
           setWeather({});
           setLocation(loc);
-          setPalceName(place);
+          setPlaceName(place);
           setLocationLoc({ lat, lon, place });
         }}
       />

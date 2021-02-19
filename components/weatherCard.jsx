@@ -1,6 +1,6 @@
 import { useDarkTheme } from "../context/themeContext";
-import { useMertic } from "../context/unitContext";
-import { getDayTime, getTemp, getTime, getweatherIcon } from "../utils";
+import { useMetric } from "../context/unitContext";
+import { getDayTime, getTemp, getTime, getWeatherIcon } from "../utils";
 import { IconContext } from "react-icons/lib";
 import {
   WiBarometer,
@@ -12,6 +12,7 @@ import {
 import { useMemo } from "react";
 import HourForecast from "./hourlyForecast";
 import DailyForecast from "./dailyForecast";
+import Alert from "./alert";
 
 const Loading = () => {
   const darkTheme = useDarkTheme();
@@ -46,7 +47,7 @@ const WeatherItem = ({ icon, value, desc }) => {
 
 const WeatherCard = ({ weather, placeName, isLoading }) => {
   const darkTheme = useDarkTheme();
-  const metric = useMertic();
+  const metric = useMetric();
 
   const temp = useMemo(() => getTemp(weather.current.temp, metric), [
     metric,
@@ -70,6 +71,10 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
         </div>
       )}
 
+      {weather.alerts?.map((alert, i) => (
+        <Alert key={i} alert={alert} timezone={weather.timezone} />
+      ))}
+
       <div>
         <span className="font-bold">Local Date/Time: </span>
         <span>
@@ -80,7 +85,6 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
           )}
         </span>
       </div>
-
       <div className="flex justify-around">
         <div className="flex flex-col justify-center items-center">
           <IconContext.Provider
@@ -88,7 +92,7 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
               className: `text-6xl ${darkTheme ? "text-white" : "text-black"}`,
             }}
           >
-            {getweatherIcon(
+            {getWeatherIcon(
               weather.current.weather[0].id,
               weather.current.weather[0].icon
             )}
@@ -101,11 +105,9 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
           <div className="text-xl">{placeName}</div>
         </div>
       </div>
-
       <div className="mt-8">
         <HourForecast hourly={weather.hourly} timezone={weather.timezone} />
       </div>
-
       <div className="flex justify-around mt-8">
         <WeatherItem
           icon={<WiSunrise />}
@@ -126,7 +128,6 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
           darkTheme
         />
       </div>
-
       <div className="flex justify-around mt-8">
         <WeatherItem
           icon={<WiHumidity />}
@@ -141,7 +142,6 @@ const WeatherCard = ({ weather, placeName, isLoading }) => {
           darkTheme
         />
       </div>
-
       <div className="mt-8">
         <DailyForecast daily={weather.daily} timezone={weather.timezone} />
       </div>

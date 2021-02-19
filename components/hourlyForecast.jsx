@@ -1,14 +1,14 @@
 import { useDarkTheme } from "../context/themeContext";
-import { useMertic } from "../context/unitContext";
+import { useMetric } from "../context/unitContext";
 import { useMemo } from "react";
 import { getTemp } from "../utils";
 import { IconContext } from "react-icons/lib";
-import { getweatherIcon } from "../utils/mapWeatherIcons";
+import { getWeatherIcon } from "../utils/mapWeatherIcons";
 import { getTime } from "../utils/days";
 
 const HourItem = ({ hour, timezone }) => {
   const darkTheme = useDarkTheme();
-  const metric = useMertic();
+  const metric = useMetric();
 
   const temp = useMemo(() => getTemp(hour.temp, metric), [metric, hour]);
   const feelsLike = useMemo(() => getTemp(hour.feels_like, metric), [
@@ -26,7 +26,7 @@ const HourItem = ({ hour, timezone }) => {
             className: `text-3xl ${darkTheme ? "text-white" : "text-black"}`,
           }}
         >
-          {getweatherIcon(hour.weather[0].id, hour.weather[0].icon, true)}
+          {getWeatherIcon(hour.weather[0].id, hour.weather[0].icon, true)}
         </IconContext.Provider>
         <div className="text-sm">{`${temp}${tempUnit}`}</div>
       </div>

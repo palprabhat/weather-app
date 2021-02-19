@@ -1,7 +1,7 @@
 import ToggleThemeSwitch from "./toggleThemeSwitch";
 import ToggleSwitch from "./toggleSwitch";
 import { useDarkTheme, useThemeToggle } from "../context/themeContext";
-import { useMertic, useUnitToggle } from "../context/unitContext";
+import { useMetric, useUnitToggle } from "../context/unitContext";
 import DropMenu from "./dropMenu";
 import { AiOutlineSetting, AiOutlineGithub } from "react-icons/ai";
 
@@ -18,7 +18,7 @@ const Header = () => {
   const darkTheme = useDarkTheme();
   const toggleTheme = useThemeToggle();
   const toggleUnit = useUnitToggle();
-  const metric = useMertic();
+  const metric = useMetric();
 
   return (
     <header

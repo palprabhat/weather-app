@@ -4,7 +4,7 @@ import { useLocalStorage } from "../hooks/useLocalStorage";
 const UnitContext = createContext();
 const UnitUpdateContext = createContext();
 
-export const useMertic = () => {
+export const useMetric = () => {
   return useContext(UnitContext);
 };
 

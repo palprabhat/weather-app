@@ -1,14 +1,14 @@
 import { useDarkTheme } from "../context/themeContext";
-import { useMertic } from "../context/unitContext";
+import { useMetric } from "../context/unitContext";
 import { useMemo } from "react";
 import { getTemp, getTime } from "../utils";
 import { IconContext } from "react-icons/lib";
 import { WiDirectionUp } from "react-icons/wi";
-import { getweatherIcon } from "../utils/mapWeatherIcons";
+import { getWeatherIcon } from "../utils/mapWeatherIcons";
 
 const DailyWeather = ({ daily, timezone }) => {
   const darkTheme = useDarkTheme();
-  const metric = useMertic();
+  const metric = useMetric();
 
   const maxtemp = useMemo(() => getTemp(daily.temp.max, metric), [
     metric,
@@ -29,7 +29,7 @@ const DailyWeather = ({ daily, timezone }) => {
             className: `text-2xl ${darkTheme ? "text-white" : "text-black"}`,
           }}
         >
-          {getweatherIcon(daily.weather[0].id, daily.weather[0].icon, true)}
+          {getWeatherIcon(daily.weather[0].id, daily.weather[0].icon, true)}
         </IconContext.Provider>
 
         <div className="flex justify-between">

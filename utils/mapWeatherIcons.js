@@ -71,7 +71,7 @@ const iconMap = [
   },
 ];
 
-export const getweatherIcon = (id, icon) => {
+export const getWeatherIcon = (id, icon) => {
   for (let i = 0; i < iconMap.length; i++)
     if (iconMap[i].ids.includes(id)) {
       const char = icon.slice(-1);
