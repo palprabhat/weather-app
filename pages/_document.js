@@ -5,9 +5,13 @@ export default class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="relative">
+        <body className="relative overflow-y-scroll h-screen">
           <Main />
-          <div id="modal-root" />
+          <div
+            id="modal-root"
+            className="fixed top-0 right-0 bottom-0 left-0"
+            style={{ zIndex: "-1" }}
+          />
           <NextScript />
         </body>
       </Html>

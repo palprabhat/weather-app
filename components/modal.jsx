@@ -5,7 +5,7 @@ import { useDarkTheme } from "../context/themeContext";
 const ModalWrapper = ({ children }) => {
   const darkTheme = useDarkTheme();
   return (
-    <div className="absolute w-full h-screen left-0 top-0 flex justify-center items-center bg-gray-600 bg-opacity-75">
+    <div className="w-full h-full flex justify-center items-center bg-gray-600 bg-opacity-75">
       <div
         className={`relative ${
           darkTheme ? "bg-gray-800" : "bg-white"
@@ -28,6 +28,11 @@ const Modal = ({ children, id, isOpen, closeOnEsc = true, onClose }) => {
     if (isOpen) {
       body.style.overflowY = "hidden";
       const modalElement = document.createElement("div");
+      modalElement.style.display = "flex";
+      modalElement.style.position = "relative";
+      modalElement.style.height = "100%";
+
+      modalRoot.style.zIndex = 1;
 
       if (modalRoot) {
         if (id) {
@@ -50,6 +55,7 @@ const Modal = ({ children, id, isOpen, closeOnEsc = true, onClose }) => {
       if (ref.current) {
         modalRoot?.removeChild(ref.current);
         ref.current = undefined;
+        modalRoot.style.zIndex = modalRoot.children.length > 0 ? 1 : -1;
       }
     };
   }, [id, isOpen]);
